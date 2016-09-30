@@ -1,6 +1,6 @@
 # MathieuFunctions.jl
 
-Julia package for [Mathieu function](http://dlmf.nist.gov/28).
+Julia package for [Mathieu functions](http://dlmf.nist.gov/28).
 
 ## License
 
@@ -9,3 +9,7 @@ MIT (See [TLDR](https://tldrlegal.com/license/mit-license) and ["The MIT License
 ## Contributors
 
 Daniel Greenbaum and Marcus P da Silva
+
+## Copyright
+
+Raytheon BBN Technologies
