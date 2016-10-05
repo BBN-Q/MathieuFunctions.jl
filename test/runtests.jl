@@ -24,3 +24,14 @@ begin
     @test (test1 - reduce(hcat,Vector{Float64}[CharacteristicB(q,k=1:3) for q in [30:.01:50;]]) |> abs |> maximum) < 2.8e-11
 end
 
+begin
+    test1 = readcsv("./test/MathieuCharacteristicL-1.csv")[1:100,:]
+    test2 = Float64[Characteristicλ(ν,q,k=1:1)[1] for ν in [0:.01:0.99;], q in [-5:.01:5;]]
+    (test1 - test2 |> abs |> maximum, test3 - test4 |> abs |> maximum) < 7.5e-15
+end
+
+begin
+    test1 = readcsv("./test/MathieuCharacteristicL-2.csv")[1:100,:]
+    test2 = Float64[Characteristicλ(ν,q,k=1:1)[1] for ν in [0:.01:0.99;], q in [30:.01:50;]]
+    (test1 - test2 |> abs |> maximum, test3 - test4 |> abs |> maximum) < 4.5e-14
+end
