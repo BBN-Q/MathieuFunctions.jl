@@ -1,4 +1,7 @@
 
+export Characteristicλ,
+       CharacteristicA,
+       CharacteristicB
 """ 
 Characteristicλ(ν,q,k)
 
