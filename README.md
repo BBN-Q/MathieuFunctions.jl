@@ -27,9 +27,9 @@ mathematical software packages).
 
 | DLMF | Julia call |
 |------|------------|
-| aₙ (q)  | `characteristicA(q,k)`
-| bₙ (q)  | `characteristicB(q,k)`
-| λ₍ᵥ₊ₖ)(q) | `characteristicλ(q,v,k)`
+| aⱼ(q)  | `characteristicA(q,j)`
+| bⱼ(q)  | `characteristicB(q,j)`
+| λ₍ᵥ₊ⱼ₎(q) | `characteristicλ(q,v,j)`
 
 ## Application: Eigenstates and energies for transmon and quantronium qubits
 
