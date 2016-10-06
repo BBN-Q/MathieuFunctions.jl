@@ -3,20 +3,20 @@ export Characteristicλ,
        CharacteristicA,
        CharacteristicB
 """ 
-Characteristicλ(ν,q,k)
+Characteristicλ(q,ν,k)
 
-Characteristic value λ_k for Mathieu's equation 
+Characteristic value λ_(ν+k) for Mathieu's equation 
 
-y'' + (λ_k - 2 q cos( 2z )) y = 0
+y'' + (λ_(ν+k) - 2 q cos( 2z )) y = 0
 
 where
 
-ν ∈ [-1,1]  - reduced order (or characteristic exponent) of the Mathieu equation
 q ∈ ℝ       - parameter
-k ∈ ℤ⁺      - eigenvalue index
+ν ∈ [-1,1]  - fractional part of the non-integer order 
+k ∈ ℤ⁺      - range of integer parts of the order
 
 """
-function Characteristicλ(nu_::Real, q::Real; k=1:5) # reduced = true
+function Characteristicλ(nu_::Real, q::Real; k=1:1) # reduced = true
     #nu = reduced ? rem(nu_+1,2)-1 : nu_;
     nu = rem(nu_+1,2)-1;
     
@@ -46,7 +46,7 @@ q ∈ ℝ  - parameter
 k ∈ ℤ⁺ - eigenvalue index
 
 """
-function CharacteristicA(q::Real; k=0:4)
+function CharacteristicA(q::Real; k=0:0)
     @assert all(k.>=0) "Indices must be non-negative integers."
 
     # Boolean indices of even and odd n values
@@ -80,7 +80,7 @@ q ∈ ℝ  - parameter
 k ∈ ℤ  - eigenvalueindex
 
 """
-function CharacteristicB(q::Real; k=1:5)
+function CharacteristicB(q::Real; k=1:1)
     @assert all(k.>0) "Indices must be positive integers."
     # Boolean indices of even and odd n values
     ie = map(iseven, k);
