@@ -11,11 +11,12 @@ function tapprox(a, b; atol=1e-15)
 end
 
 @testset "basic" begin
-    @test charλ(0, 1, k=1:10) == [1.0, 1.0, 9.0, 9.0, 25.0, 25.0, 49.0, 49.0, 81.0, 81.0]
-    @test maximum(charA(0,k=0:100) - [0:100;].^2) == 0
-    @test norm(charB(0,k=1:100) - [1:100;].^2) == 0
+    @test charλ(0, 1.0:10.0) == [1.0, 1.0, 9.0, 9.0, 25.0, 25.0, 49.0, 49.0, 81.0, 81.0]
+    @test maximum(charA(0.0, 0.0:100.0) - [0:100;].^2) == 0
+    @test norm(charB(0.0, 1.0:100.0) - [1:100;].^2) == 0
+    #@test charA(0, 2) == charA(0, k=2:2)
+    #@test charB(0, 2) == charB(0, k=2:2)
 end
-
 
 filename = "MathieuCharacteristicA-1.csv"
 @testset "$filename" begin

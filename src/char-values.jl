@@ -15,7 +15,12 @@ q ∈ ℝ       - parameter
 k ∈ ℤ⁺      - range of integer parts of the order
 
 """
-function charλ(q::Real, nu_::Real; k::UnitRange=1:1) # reduced = true
+
+function charλ(q::Real, k_::StepRangeLen=1.0:1.0) # reduced = true
+    @assert isinteger(step(k_)) && round(Int,step(k_))==1 "Range of eigenvalue indices must have unit step"
+
+    k = floor(Int,first(k_)):floor(Int,last(k_));
+    nu_ = first(k_)-floor(Int,last(k_));
     #nu = reduced ? rem(nu_+1,2)-1 : nu_;
     nu = rem(nu_+1,2)-1;
 
@@ -33,9 +38,11 @@ function charλ(q::Real, nu_::Real; k::UnitRange=1:1) # reduced = true
     return a
 end
 
-"""
-charA(q; k=0:4)
+function charλ(q::Real, nu::Number)
+    charλ(q, nu:nu)
+end
 
+"""
 char value A_k for Mathieu's equation
 
 y'' + (A_k - 2 q cos( 2z )) y = 0
@@ -43,31 +50,36 @@ y'' + (A_k - 2 q cos( 2z )) y = 0
 where
 
 q ∈ ℝ  - parameter
-k ∈ ℤ⁺ - eigenvalue index
+k ∈ ℤ⁺ - eigenvalue index, or range of indices
 
 """
-function charA(q::Real; k::UnitRange=1:1)
+
+function charA(q::Real, k::StepRangeLen{<:Real}=1.0:1.0)
     all(x -> x >= 0, k) || throw(DomainError(k, "Indices must be non-negative integers."))
 
     # Boolean indices of even and odd n values
-    ie = map(iseven, k)
-    io = map(!, ie)
+    k_ = map(x -> round(Int, x), k);
+    ie = map(iseven, k_);
+    io = map(!, ie);
 
-    a = Array{Float64}(undef ,length(k))
-    k1 = k .+ 1
-    a[ie] = charλ(abs(q), 0.0; k = k1)[ie]
+    a = Array{Float64}(undef ,length(k));
+    k1 = k .+ 1;
+    a[ie] = charλ(abs(q), k1)[ie];
     if q>=0
-        a[io] = charλ(q, one(q); k = k1)[io]
+        a[io] = charλ(q, k1)[io];
     else
         if 0 in k # maybe not the cleanest way to do it
-            a[io] = charλ(abs(q), one(q); k = k[2]:last(k))[io[2:end]]
+            a[io] = charλ(abs(q), k[2]:last(k))[io[2:end]];
         else
-            a[io] = charλ(abs(q), one(q); k=k)[io]
+            a[io] = charλ(abs(q), k)[io];
         end
     end
     return a
 end
 
+function charA(q::Real, k::Number)
+    charA(q,k:k)
+end
 
 """
 charB(q,k)
@@ -79,21 +91,28 @@ y'' + (B_k - 2 q cos( 2z )) y = 0
 where
 
 q ∈ ℝ  - parameter
-k ∈ ℤ  - eigenvalueindex
+k ∈ ℤ  - eigenvalue index or range of eigenvalues indices
 
 """
-function charB(q::Real; k::UnitRange=1:1)
+
+function charB(q::Real, k::StepRangeLen{<:Real}=1.0:1.0)
     all(x -> x > 0, k) || throw(DomainError(k, "Indices must be positive integers."))
     # Boolean indices of even and odd n values
-    ie = map(iseven, k)
-    io = map(!, ie)
+    k_ = map(x -> round(Int, x), k);
+    ie = map(iseven, k_);
+    io = map(!, ie);
 
-    b = Array{Float64}(undef, length(k))
-    b[ie] = charλ(q,0.0,k=k)[ie]
+    b = Array{Float64}(undef, length(k));
+    b[ie] = charλ(q,k)[ie];
     if q>=0
-        b[io] = charλ(q,1.0,k=k)[io]
+        b[io] = charλ(q,k)[io];
     else
-        b[io] = charλ(abs(q),1.0,k = (k .+ 1))[io]
+        b[io] = charλ(abs(q), (k .+ 1))[io];
     end
     return b
 end
+
+function charB(q::Real, k::Integer)
+    charB(q,k:k)
+end
+
