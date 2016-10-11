@@ -6,6 +6,8 @@ Mathieu functions are the eigenvalues and eigenfunction of *Mathieu's
 equation* (for more details, see [NIST's Digital Library of
 Mathematical Functions](http://dlmf.nist.gov/28)).
 
+## Implementation
+
 This implementation is based on an algorhtm described by Shirts, which
 revolves around an application of Floquet's theorem. Interestingly, an
 equivalent description can be obtained by considering the eigenstates
@@ -25,20 +27,74 @@ mathematical software packages).
 
 ## Mathieu equation characteristic values (eigenvalues)
 
-| DLMF | Julia call |
-|------|------------|
-| aⱼ(q)  | `characteristicA(q,j)`
-| bⱼ(q)  | `characteristicB(q,j)`
-| λ₍ᵥ₊ⱼ₎(q) | `characteristicλ(q,v,j)`
+We follow the notation used in NIST's Digital Library of Mathematical Functions, 
+
+| DLMF | Julia call | Description | 
+|------|------------|-------------|
+| aⱼ(q)  | `charA(q,j)` | Integer order Mathieu characteristic value of even parity | 
+| bⱼ(q)  | `charB(q,j)` | Integer order Mathieu characteristic value of odd parity |
+| λ₍ᵥ₊ⱼ₎(q) | `charλ(q,v,j)`  | Real-valued order Mathieu characteristic value |
+
+For integer order characteristic values, our implementation yields
+<img href="doc/reproduction-of-dlmf-28.2.1.png" />
+which should be contrasted with the [corresponding plot in the DTMF @ NIST](http://dlmf.nist.gov/28.2.F1.mag).
+
+Similarly, for real-valued order, our implementatio yiels
+<img href="doc/reproduction-of-dlmf-28.13.1.png" />
+which should be contrasted with the [corresponding plot in the DTMF @ NIST](http://dlmf.nist.gov/28.13.F1.mag).
 
 ## Application: Eigenstates and energies for transmon and quantronium qubits
 
-TODO
+Thanks to the way that the Mathieu characteristic values are computed, the
+order indexing convention used here is particularly convenient for computing
+the energy spectrum of a broad class of superconducting qubits including the 
+[quantronium](http://www.phys.ens.fr/~cottet/ACottetThesis.pdf) and the 
+[transmon](https://arxiv.org/abs/cond-mat/0703002).
+
+As an example of how this package may be used, here is the Julia code
+that reproduces the energy spectrum illustrated in [Koch et al.]().
+
+```julia
+using MathieuFunction, PyPlot
+
+EJoverEC = 30;
+EC       = 1;#0.34; # GHz
+nLevels  = 10;
+nCharge  = 3; #0.5;
+nData    = 1001;
+
+Nstart = 5;
+
+q = -(1/2)*EJoverEC;
+tol = 1e-12;
+
+ng = linspace(-nCharge,nCharge,nData);
+nu = -2*ng;
+
+a = zeros(nData,nLevels);
+N = zeros(nData,1);
+Err = zeros(nData,1);
+for i=1:nData
+    #println(nu[i])
+    a[i,:] = Characteristicλ(q,nu[i],k=1:nLevels);
+end
+
+E = EC*a;
+Eng_half = Characteristicλ(q,-1,k=1:nLevels);
+Eng_0    = Characteristicλ(q, 0,k=1:nLevels);
+E01      = Eng_half[2] - Eng_half[1];
+
+plot(ng,(E-Eng_0[1])/E01);
+ylim(-.5,5)
+```
+
+<img href="doc/transmon-levels.png" />
 
 ## TODO
 
 - [ ] Some documentation with examples
 - [X] Support for characteristic values (integer and non-integer order)
+  - [ ] Unify order indexing, match DLMF conventions
 - [ ] Support for characteristic function (integer and non-integer order)
 
 ## License
