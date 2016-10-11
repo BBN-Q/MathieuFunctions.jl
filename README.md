@@ -36,11 +36,11 @@ We follow the notation used in NIST's Digital Library of Mathematical Functions,
 | λ₍ᵥ₊ⱼ₎(q) | `charλ(q,v,j)`  | Real-valued order Mathieu characteristic value |
 
 For integer order characteristic values, our implementation yields
-<img href="doc/reproduction-of-dlmf-28.2.1.png" />
+<img href="https://raw.githubusercontent.com/BBN-Q/MathieuFunctions.jl/master/doc/reproduction-of-dlmf-28.2.1.png" />
 which should be contrasted with the [corresponding plot in the DTMF @ NIST](http://dlmf.nist.gov/28.2.F1.mag).
 
 Similarly, for real-valued order, our implementatio yiels
-<img href="doc/reproduction-of-dlmf-28.13.1.png" />
+<img href="https://raw.githubusercontent.com/BBN-Q/MathieuFunctions.jl/master/doc/reproduction-of-dlmf-28.13.1.png" />
 which should be contrasted with the [corresponding plot in the DTMF @ NIST](http://dlmf.nist.gov/28.13.F1.mag).
 
 ## Application: Eigenstates and energies for transmon and quantronium qubits
@@ -88,7 +88,7 @@ plot(ng,(E-Eng_0[1])/E01);
 ylim(-.5,5)
 ```
 
-<img href="doc/transmon-levels.png" />
+<img href="https://raw.githubusercontent.com/BBN-Q/MathieuFunctions.jl/master/doc/transmon-levels.png" />
 
 ## TODO
 
