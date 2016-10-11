@@ -58,9 +58,9 @@ that reproduces the energy spectrum illustrated in [Koch et al.]().
 using MathieuFunction, PyPlot
 
 EJoverEC = 30;
-EC       = 1;#0.34; # GHz
+EC       = 1; # GHz
 nLevels  = 10;
-nCharge  = 3; #0.5;
+nCharge  = 2; 
 nData    = 1001;
 
 Nstart = 5;
@@ -76,12 +76,12 @@ N = zeros(nData,1);
 Err = zeros(nData,1);
 for i=1:nData
     #println(nu[i])
-    a[i,:] = Characteristicλ(q,nu[i],k=1:nLevels);
+    a[i,:] = charλ(q,nu[i],k=1:nLevels);
 end
 
 E = EC*a;
-Eng_half = Characteristicλ(q,-1,k=1:nLevels);
-Eng_0    = Characteristicλ(q, 0,k=1:nLevels);
+Eng_half = charλ(q,-1,k=1:nLevels);
+Eng_0    = charλ(q, 0,k=1:nLevels);
 E01      = Eng_half[2] - Eng_half[1];
 
 plot(ng,(E-Eng_0[1])/E01);

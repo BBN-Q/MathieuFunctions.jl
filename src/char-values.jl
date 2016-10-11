@@ -1,11 +1,11 @@
 
-export Characteristicλ,
-       CharacteristicA,
-       CharacteristicB
+export charλ,
+       charA,
+       charB
 """ 
-Characteristicλ(q,ν,k)
+charλ(q,ν,k)
 
-Characteristic value λ_(ν+k) for Mathieu's equation 
+char value λ_(ν+k) for Mathieu's equation 
 
 y'' + (λ_(ν+k) - 2 q cos( 2z )) y = 0
 
@@ -16,7 +16,7 @@ q ∈ ℝ       - parameter
 k ∈ ℤ⁺      - range of integer parts of the order
 
 """
-function Characteristicλ(nu_::Real, q::Real; k=1:1) # reduced = true
+function charλ(nu_::Real, q::Real; k=1:1) # reduced = true
     #nu = reduced ? rem(nu_+1,2)-1 : nu_;
     nu = rem(nu_+1,2)-1;
     
@@ -34,9 +34,9 @@ function Characteristicλ(nu_::Real, q::Real; k=1:1) # reduced = true
 end
 
 """ 
-CharacteristicA(q; k=0:4)
+charA(q; k=0:4)
 
-Characteristic value A_k for Mathieu's equation 
+char value A_k for Mathieu's equation 
 
 y'' + (A_k - 2 q cos( 2z )) y = 0
 
@@ -46,7 +46,7 @@ q ∈ ℝ  - parameter
 k ∈ ℤ⁺ - eigenvalue index
 
 """
-function CharacteristicA(q::Real; k=0:0)
+function charA(q::Real; k=0:0)
     @assert all(k.>=0) "Indices must be non-negative integers."
 
     # Boolean indices of even and odd n values
@@ -54,23 +54,23 @@ function CharacteristicA(q::Real; k=0:0)
     io = !ie;
 
     a = Array(Float64,length(k));
-    a[ie] = Characteristicλ(0.0,abs(q),k=k+1)[ie];
+    a[ie] = charλ(0.0,abs(q),k=k+1)[ie];
     if q>=0
-        a[io] = Characteristicλ(1.0,q,k=k+1)[io]; 
+        a[io] = charλ(1.0,q,k=k+1)[io]; 
     else
         if 0 in k # maybe not the cleanest way to do it
-            a[io] = Characteristicλ(1.0,abs(q),k=k[2]:last(k))[io[2:end]]
+            a[io] = charλ(1.0,abs(q),k=k[2]:last(k))[io[2:end]]
         else
-            a[io] = Characteristicλ(1.0,abs(q),k=k)[io]; 
+            a[io] = charλ(1.0,abs(q),k=k)[io]; 
         end
     end
     return a
 end
 
 """ 
-CharacteristicB(q,k)
+charB(q,k)
 
-Characteristic value B_k for Mathieu's equation 
+char value B_k for Mathieu's equation 
 
 y'' + (B_k - 2 q cos( 2z )) y = 0
 
@@ -80,18 +80,18 @@ q ∈ ℝ  - parameter
 k ∈ ℤ  - eigenvalueindex
 
 """
-function CharacteristicB(q::Real; k=1:1)
+function charB(q::Real; k=1:1)
     @assert all(k.>0) "Indices must be positive integers."
     # Boolean indices of even and odd n values
     ie = map(iseven, k);
     io = !ie;
 
     b = Array(Float64,length(k));
-    b[ie] = Characteristicλ(0.0,q,k=k)[ie]; 
+    b[ie] = charλ(0.0,q,k=k)[ie]; 
     if q>=0
-        b[io] = Characteristicλ(1.0,q,k=k)[io];
+        b[io] = charλ(1.0,q,k=k)[io];
     else
-        b[io] = Characteristicλ(1.0,abs(q),k=k+1)[io]; 
+        b[io] = charλ(1.0,abs(q),k=k+1)[io]; 
     end
 
     return b
