@@ -56,7 +56,7 @@ the energy spectrum of a broad class of superconducting qubits including the
 [transmon](https://arxiv.org/abs/cond-mat/0703002).
 
 As an example of how this package may be used, here is the Julia code
-that reproduces the energy spectrum illustrated in [Koch et al.]().
+that reproduces the energy spectrum illustrated in [Koch et al.](https://arxiv.org/abs/cond-mat/0703002)
 
 ```julia
 using MathieuFunction, PyPlot
