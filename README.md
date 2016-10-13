@@ -8,13 +8,18 @@ Mathematical Functions](http://dlmf.nist.gov/28)).
 
 ## Implementation
 
-This implementation is based on an algorhtm described by Shirts, which
-revolves around an application of Floquet's theorem. Interestingly, an
+This implementation is based on 
+[an algorithm described by Shirts](http://dl.acm.org/citation.cfm?id=155796), which
+revolves around an application of Floquet's theorem. 
+
+Interestingly, an
 equivalent description can be obtained by considering the eigenstates
 and eigenenergies of a particular type of artificial atom based on
-superconducting circuits (see Cotet's Ph.D. thesis for a discussion of
-this connection, or a recent paper on a more modern implementation of
-a device known as a "transmon"). In this physical picture, Mathieu
+superconducting circuits 
+(see [Cotet's Ph.D. thesis](http://www.phys.ens.fr/~cottet/ACottetThesis.pdf) 
+for a discussion of this connection, or 
+[a recent paper by Koch et al.](https://arxiv.org/abs/cond-mat/0703002)). 
+In this physical picture, Mathieu
 functions can be approximated by computing the eigenvectors and
 eigenvalues of a Hamiltonian truncated to a sufficiently high
 dimension (this Hamiltonian corresponds to a symmetric tri-diagonal
