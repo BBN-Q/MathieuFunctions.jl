@@ -46,7 +46,7 @@ For integer order characteristic values, our implementation yields
 
 which should be contrasted with the [corresponding plot in the DTMF @ NIST](http://dlmf.nist.gov/28.2.F1.mag).
 
-Similarly, for real-valued order, our implementatio yields
+Similarly, for real-valued order, our implementation yields
 
 ![](doc/reproduction-of-dlmf-28.13.1.png?raw=true "Real-valued order Mathieu characteristic function")
 
