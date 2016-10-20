@@ -114,6 +114,10 @@ MIT (See [TLDR](https://tldrlegal.com/license/mit-license) and ["The MIT License
 
 Daniel Greenbaum and Marcus P da Silva
 
+## Acknowledgements
+
+This effort was partially supported by IARPA under the LogiQ program.
+
 ## Copyright
 
 Raytheon BBN Technologies
