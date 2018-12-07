@@ -1,39 +1,62 @@
-using Base.Test, MathieuFunctions
+using Test, MathieuFunctions
+using LinearAlgebra
+using DelimitedFiles
 
-@test maximum(charA(0,k=0:100) - [0:100;].^2) == 0
+readcsv(f) = DelimitedFiles.readdlm(f, ',')
 
-@test norm(charB(0,k=1:100) - [1:100;].^2) == 0
-
-begin
-    test1 = readcsv("./MathieuCharacteristicA-1.csv");
-    @test (test1 - reduce(hcat,Vector{Float64}[charA(q,k=0:10) for q in [-10:.01:10;]]) |> abs |> maximum) < 7.5e-13
+function tapprox(a, b; atol=1e-15)
+    normval = norm(a - b, Inf)
+    @info "normval = $normval"
+    isapprox(a, b; norm= x -> norm(x, Inf), atol = atol)
 end
 
-begin
-    test1 = readcsv("./MathieuCharacteristicA-2.csv");
-    @test (test1 - reduce(hcat,Vector{Float64}[charA(q,k=0:3) for q in [30:.01:50;]]) |> abs |> maximum) < 7.6e-13
+@testset "basic" begin
+    @test charλ(1, 0, k=1:10) == [1.0, 1.0, 9.0, 9.0, 25.0, 25.0, 49.0, 49.0, 81.0, 81.0]
+    @test maximum(charA(0,k=0:100) - [0:100;].^2) == 0
+    @test norm(charB(0,k=1:100) - [1:100;].^2) == 0
 end
 
-begin
-    test1 = readcsv("./MathieuCharacteristicB-1.csv");
-    @test (test1 - reduce(hcat,Vector{Float64}[charB(q,k=1:10) for q in [-10:.01:10;]]) |> abs |> maximum) < 7.5e-13
+
+filename = "MathieuCharacteristicA-1.csv"
+@testset "$filename" begin
+    test1 = readcsv(filename)
+    r = reduce(hcat,Vector{Float64}[charA(q,k=0:10) for q in [-10:.01:10;]])
+    @test tapprox(test1, r;  atol=7.5e-13)
 end
 
-begin
-    test1 = readcsv("./MathieuCharacteristicB-2.csv");
-    @test (test1 - reduce(hcat,Vector{Float64}[charB(q,k=1:3) for q in [30:.01:50;]]) |> abs |> maximum) < 2.8e-11
+filename = "MathieuCharacteristicA-2.csv"
+@testset "$filename" begin
+    test1 = readcsv(filename)
+    r = reduce(hcat,Vector{Float64}[charA(q,k=0:3) for q in [30:.01:50;]])
+    @test tapprox(test1, r;  atol=7.6e-13) # NOTE: was 7.5e-13
 end
 
-begin
-    test1 = readcsv("./MathieuCharacteristicL-1.csv")[1:100,:]
+filename = "MathieuCharacteristicB-1.csv"
+@testset "$filename" begin
+    test1 = readcsv(filename)
+    r = reduce(hcat,Vector{Float64}[charB(q,k=1:10) for q in [-10:.01:10;]])
+    @test tapprox(test1, r;  atol=7.5e-13)
+end
+
+filename = "MathieuCharacteristicB-2.csv"
+@testset "$filename" begin
+    test1 = readcsv(filename)
+    r = reduce(hcat,Vector{Float64}[charB(q,k=1:3) for q in [30:.01:50;]])
+    @test tapprox(test1, r; atol=2.8e-11)
+end
+
+filename = "MathieuCharacteristicL-1.csv"
+@testset "$filename" begin
+    test1 = readcsv(filename)[1:100,:]
     test2 = Float64[charλ(q,ν,k=1:1)[1] for ν in [0:.01:0.99;], q in [-5:.01:5;]]
-    (test1 - test2 |> abs |> maximum) < 7.5e-15
+    @test_broken tapprox(test1, test2, atol=7.5e-15)
     # TODO: test ν > 1 (currently failing)
 end
 
-begin
-    test1 = readcsv("./MathieuCharacteristicL-2.csv")[1:100,:]
+filename = "MathieuCharacteristicL-2.csv"
+@testset "$filename" begin
+    test1 = readcsv(filename)[1:100,:]
     test2 = Float64[charλ(q,ν,k=1:1)[1] for ν in [0:.01:0.99;], q in [30:.01:50;]]
-    (test1 - test2 |> abs |> maximum) < 4.5e-14
+    @test_broken tapprox(test1, test2, atol=4.5e-14)
     # TODO: test ν > 1 (currently failing)
 end

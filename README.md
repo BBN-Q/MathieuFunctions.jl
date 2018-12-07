@@ -1,5 +1,10 @@
 # MathieuFunctions.jl
 
+[![Build Status](https://travis-ci.com/jlapeyre/MathieuFunctions.jl.svg?branch=juliav1.0)](https://travis-ci.com/jlapeyre/MathieuFunctions.jl)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/jlapeyre/MathieuFunctions.jl?svg=true)](https://ci.appveyor.com/project/jlapeyre/MathieuFunctions-jl)
+[![Codecov](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl)
+[![Coveralls](https://coveralls.io/repos/github/jlapeyre/MathieuFunctions.jl/badge.svg?branch=master)](https://coveralls.io/github/jlapeyre/MathieuFunctions.jl?branch=master)
+
 Julia package for Mathieu functions.
 
 Mathieu functions are the eigenvalues and eigenfunction of *Mathieu's
