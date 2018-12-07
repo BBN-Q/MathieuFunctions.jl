@@ -1,6 +1,6 @@
 # MathieuFunctions.jl
 
-[![Build Status](https://travis-ci.com/jlapeyre/MathieuFunctions.jl.svg?branch=juliav1.0)](https://travis-ci.com/jlapeyre/MathieuFunctions.jl)
+[![Build Status](https://travis-ci.org/BBN-Q/MathieuFunctions.jl.svg?branch=master)](https://travis-ci.org/BBN-Q/MathieuFunctions.jl)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jlapeyre/MathieuFunctions.jl?svg=true)](https://ci.appveyor.com/project/jlapeyre/MathieuFunctions-jl)
 [![Codecov](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl)
 [![Coveralls](https://coveralls.io/repos/github/jlapeyre/MathieuFunctions.jl/badge.svg?branch=master)](https://coveralls.io/github/jlapeyre/MathieuFunctions.jl?branch=master)
@@ -69,7 +69,7 @@ As an example of how this package may be used, here is the Julia code
 that reproduces the energy spectrum illustrated in [Koch et al.](https://arxiv.org/abs/cond-mat/0703002)
 
 ```julia
-using MathieuFunction, PyPlot
+using MathieuFunctions, PyPlot
 
 EJoverEC = 30;
 EC       = 1; # GHz
@@ -82,7 +82,7 @@ Nstart = 5;
 q = -(1/2)*EJoverEC;
 tol = 1e-12;
 
-ng = linspace(-nCharge,nCharge,nData);
+ng = LinRange(-nCharge,nCharge,nData);
 nu = -2*ng;
 
 a = zeros(nData,nLevels);
@@ -98,7 +98,7 @@ Eng_half = charλ(q,-1,k=1:nLevels);
 Eng_0    = charλ(q, 0,k=1:nLevels);
 E01      = Eng_half[2] - Eng_half[1];
 
-plot(ng,(E-Eng_0[1])/E01);
+plot(ng,(E .- Eng_0[1])/E01);
 ylim(-.5,5)
 ```
 
