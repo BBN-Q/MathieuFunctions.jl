@@ -2,7 +2,8 @@ export charλ,
        charA,
        charB
 """
-charλ(q,ν,k)
+    charλ(q, ν, k::AbstractRange)
+    charλ(q, ν, k::Integer)
 
 char value λ_(ν+k) for Mathieu's equation
 
@@ -13,11 +14,10 @@ where
 q ∈ ℝ       - parameter
 ν ∈ [-1,1]  - fractional part of the non-integer order
 k ∈ ℤ⁺      - range of integer parts of the order
-
 """
-function charλ(nu_::Real, q::Real; k::AbstractRange=1:1) # reduced = true
-    #nu = reduced ? rem(nu_+1,2)-1 : nu_;
-    nu = rem(nu_+1,2)-1;
+function charλ(nu_::Real, q::Real, k::AbstractRange) # reduced = true
+    #nu = reduced ? rem(nu_+1,2)-1 : nu_
+    nu = rem(nu_+1,2)-1
 
     # Set matrix size using formula from Shirts paper (1993), Eqs. (2.1)-(2.2).
     nu0 = nu + maximum(k)
@@ -33,8 +33,11 @@ function charλ(nu_::Real, q::Real; k::AbstractRange=1:1) # reduced = true
     return a
 end
 
+charλ(nu_::Real, q::Real, k::Integer) = charλ(nu_, q, k:k)[1]
+
 """
-charA(q; k=0:4)
+    charA(q, k::AbstractRange)
+    charA(q, k::Integer)
 
 char value A_k for Mathieu's equation
 
@@ -44,9 +47,8 @@ where
 
 q ∈ ℝ  - parameter
 k ∈ ℤ⁺ - eigenvalue index
-
 """
-function charA(q::Real; k::AbstractRange=0:0)
+function charA(q::Real, k::AbstractRange)
     all(x -> x >= 0, k) || throw(DomainError(k, "Indices must be non-negative integers."))
 
     # Boolean indices of even and odd n values
@@ -55,22 +57,24 @@ function charA(q::Real; k::AbstractRange=0:0)
 
     a = Array{Float64}(undef ,length(k))
     k1 = k .+ 1
-    a[ie] = charλ(0.0, abs(q); k = k1)[ie]
+    a[ie] = charλ(0.0, abs(q), k1)[ie]
     if q>=0
-        a[io] = charλ(one(q), q; k = k1)[io]
+        a[io] = charλ(one(q), q, k1)[io]
     else
         if 0 in k # maybe not the cleanest way to do it
-            a[io] = charλ(one(q), abs(q); k = k[2]:last(k))[io[2:end]]
+            a[io] = charλ(one(q), abs(q), k[2]:last(k))[io[2:end]]
         else
-            a[io] = charλ(one(q), abs(q); k=k)[io]
+            a[io] = charλ(one(q), abs(q), k)[io]
         end
     end
     return a
 end
 
+charA(q::Real, k::Integer) = charA(q, k:k)[1]
 
 """
-charB(q,k)
+    charB(q, k::AbstractRange)
+    charB(q, k::Integer)
 
 char value B_k for Mathieu's equation
 
@@ -80,20 +84,21 @@ where
 
 q ∈ ℝ  - parameter
 k ∈ ℤ  - eigenvalueindex
-
 """
-function charB(q::Real; k::AbstractRange=1:1)
+function charB(q::Real, k::AbstractRange)
     all(x -> x > 0, k) || throw(DomainError(k, "Indices must be positive integers."))
     # Boolean indices of even and odd n values
     ie = map(iseven, k)
     io = map(!, ie)
 
     b = Array{Float64}(undef, length(k))
-    b[ie] = charλ(0.0,q,k=k)[ie]
+    b[ie] = charλ(0.0, q, k)[ie]
     if q>=0
-        b[io] = charλ(1.0,q,k=k)[io]
+        b[io] = charλ(1.0, q, k)[io]
     else
-        b[io] = charλ(1.0,abs(q),k = (k .+ 1))[io]
+        b[io] = charλ(1.0,abs(q), (k .+ 1))[io]
     end
     return b
 end
+
+charB(q::Real, k::Integer) = charB(q, k:k)[1]
