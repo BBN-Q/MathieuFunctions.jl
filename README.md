@@ -72,7 +72,7 @@ that reproduces the energy spectrum illustrated in [Koch et al.](https://arxiv.o
 using MathieuFunctions, PyPlot
 
 EJoverEC = 30;
-EC       = 1; # GHz
+EC       = 0.35; # GHz
 nLevels  = 10;
 nCharge  = 2; 
 nData    = 1001;
@@ -98,7 +98,7 @@ Eng_half = charλ(q,-1,k=1:nLevels);
 Eng_0    = charλ(q, 0,k=1:nLevels);
 E01      = Eng_half[2] - Eng_half[1];
 
-plot(ng,(E .- Eng_0[1])/E01);
+plot(ng,(E .- Eng_0[1])/E01);xlabel(L"$n_g$");ylabel(L"$E$");
 ylim(-.5,5)
 ```
 
