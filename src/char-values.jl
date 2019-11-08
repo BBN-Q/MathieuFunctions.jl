@@ -15,7 +15,7 @@ q ∈ ℝ       - parameter
 k ∈ ℤ⁺      - range of integer parts of the order
 
 """
-function charλ(nu_::Real, q::Real; k::AbstractRange=1:1) # reduced = true
+function charλ(q::Real, nu_::Real; k::AbstractRange=1:1) # reduced = true
     #nu = reduced ? rem(nu_+1,2)-1 : nu_;
     nu = rem(nu_+1,2)-1;
 
