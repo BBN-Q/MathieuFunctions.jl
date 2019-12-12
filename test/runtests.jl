@@ -49,7 +49,7 @@ filename = "MathieuCharacteristicL-1.csv"
 @testset "$filename" begin
     test1 = readcsv(filename)[1:100,:]
     test2 = Float64[charλ(q,ν,k=1:1)[1] for ν in [0:.01:0.99;], q in [-5:.01:5;]]
-    @test_broken tapprox(test1, test2, atol=7.5e-15)
+    @test tapprox(test1, test2, atol=7.5e-15)
     # TODO: test ν > 1 (currently failing)
 end
 
@@ -57,6 +57,6 @@ filename = "MathieuCharacteristicL-2.csv"
 @testset "$filename" begin
     test1 = readcsv(filename)[1:100,:]
     test2 = Float64[charλ(q,ν,k=1:1)[1] for ν in [0:.01:0.99;], q in [30:.01:50;]]
-    @test_broken tapprox(test1, test2, atol=4.5e-14)
+    @test tapprox(test1, test2, atol=4.5e-14)
     # TODO: test ν > 1 (currently failing)
 end
