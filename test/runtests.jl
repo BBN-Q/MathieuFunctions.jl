@@ -11,7 +11,7 @@ function tapprox(a, b; atol=1e-15)
 end
 
 @testset "basic" begin
-    @test charλ(1, 0, k=1:10) == [1.0, 1.0, 9.0, 9.0, 25.0, 25.0, 49.0, 49.0, 81.0, 81.0]
+    @test charλ(0, 1, k=1:10) == [1.0, 1.0, 9.0, 9.0, 25.0, 25.0, 49.0, 49.0, 81.0, 81.0]
     @test maximum(charA(0,k=0:100) - [0:100;].^2) == 0
     @test norm(charB(0,k=1:100) - [1:100;].^2) == 0
 end
