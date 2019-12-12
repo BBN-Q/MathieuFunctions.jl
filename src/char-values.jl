@@ -46,7 +46,7 @@ q ∈ ℝ  - parameter
 k ∈ ℤ⁺ - eigenvalue index
 
 """
-function charA(q::Real; k::UnitRange=0:0)
+function charA(q::Real; k::UnitRange=1:1)
     all(x -> x >= 0, k) || throw(DomainError(k, "Indices must be non-negative integers."))
 
     # Boolean indices of even and odd n values
