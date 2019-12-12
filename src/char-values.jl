@@ -55,14 +55,14 @@ function charA(q::Real; k::UnitRange=0:0)
 
     a = Array{Float64}(undef ,length(k))
     k1 = k .+ 1
-    a[ie] = charλ(0.0, abs(q); k = k1)[ie]
+    a[ie] = charλ(abs(q), 0.0; k = k1)[ie]
     if q>=0
-        a[io] = charλ(one(q), q; k = k1)[io]
+        a[io] = charλ(q, one(q); k = k1)[io]
     else
         if 0 in k # maybe not the cleanest way to do it
-            a[io] = charλ(one(q), abs(q); k = k[2]:last(k))[io[2:end]]
+            a[io] = charλ(abs(q), one(q); k = k[2]:last(k))[io[2:end]]
         else
-            a[io] = charλ(one(q), abs(q); k=k)[io]
+            a[io] = charλ(abs(q), one(q); k=k)[io]
         end
     end
     return a
@@ -89,11 +89,11 @@ function charB(q::Real; k::UnitRange=1:1)
     io = map(!, ie)
 
     b = Array{Float64}(undef, length(k))
-    b[ie] = charλ(0.0,q,k=k)[ie]
+    b[ie] = charλ(q,0.0,k=k)[ie]
     if q>=0
-        b[io] = charλ(1.0,q,k=k)[io]
+        b[io] = charλ(q,1.0,k=k)[io]
     else
-        b[io] = charλ(1.0,abs(q),k = (k .+ 1))[io]
+        b[io] = charλ(abs(q),1.0,k = (k .+ 1))[io]
     end
     return b
 end
