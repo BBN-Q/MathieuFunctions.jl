@@ -15,7 +15,7 @@ q ∈ ℝ       - parameter
 k ∈ ℤ⁺      - range of integer parts of the order
 
 """
-function charλ(q::Real, nu_::Real; k::AbstractRange=1:1) # reduced = true
+function charλ(q::Real, nu_::Real; k::UnitRange=1:1) # reduced = true
     #nu = reduced ? rem(nu_+1,2)-1 : nu_;
     nu = rem(nu_+1,2)-1;
 
@@ -46,7 +46,7 @@ q ∈ ℝ  - parameter
 k ∈ ℤ⁺ - eigenvalue index
 
 """
-function charA(q::Real; k::AbstractRange=0:0)
+function charA(q::Real; k::UintRange=0:0)
     all(x -> x >= 0, k) || throw(DomainError(k, "Indices must be non-negative integers."))
 
     # Boolean indices of even and odd n values
@@ -82,7 +82,7 @@ q ∈ ℝ  - parameter
 k ∈ ℤ  - eigenvalueindex
 
 """
-function charB(q::Real; k::AbstractRange=1:1)
+function charB(q::Real; k::UnitRange=1:1)
     all(x -> x > 0, k) || throw(DomainError(k, "Indices must be positive integers."))
     # Boolean indices of even and odd n values
     ie = map(iseven, k)
