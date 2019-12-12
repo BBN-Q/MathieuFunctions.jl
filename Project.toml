@@ -7,7 +7,7 @@ version = "1.0.0"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [compat]
-julia = "0.7, 1.3"
+julia = "0.7, 1.4"
 
 [extras]
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
