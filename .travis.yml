@@ -4,15 +4,23 @@ os:
   - linux
   - osx
 julia:
-  - 0.7
   - 1.0
   - nightly
+
+codecov: true
+coveralls: true
+
 matrix:
   allow_failures:
     - julia: nightly
   fast_finish: true
+
 notifications:
   email: false
+
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'using Pkg; Pkg.build(); Pkg.test(coverage=true)'
 after_success:
-  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
-  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder())'
+  #- julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
+  #- julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder())'
