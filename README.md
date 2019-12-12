@@ -1,7 +1,7 @@
 # MathieuFunctions.jl
 
 [![Build Status](https://travis-ci.org/BBN-Q/MathieuFunctions.jl.svg?branch=master)](https://travis-ci.org/BBN-Q/MathieuFunctions.jl)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/jlapeyre/MathieuFunctions.jl?svg=true)](https://ci.appveyor.com/project/jlapeyre/MathieuFunctions-jl)
+[![Build status](https://ci.appveyor.com/api/projects/status/35924u90n3qp7isn/branch/master?svg=true)](https://ci.appveyor.com/project/matthewware/mathieufunctions-jl/branch/master)
 [![Codecov](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl)
 [![Coverage Status](https://coveralls.io/repos/github/BBN-Q/MathieuFunctions.jl/badge.svg?branch=master)](https://coveralls.io/github/BBN-Q/MathieuFunctions.jl?branch=master)
 
