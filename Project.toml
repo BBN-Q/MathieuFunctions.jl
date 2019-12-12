@@ -1,10 +1,13 @@
 name = "MathieuFunctions"
 uuid = "9663349c-1c87-11ea-291d-bd81f86a413c"
 authors = ["Marcus P da Silva", "Daniel Greenbaum", "John Lapeyre", "Matthew Ware"]
-version = "0.2.0"
+version = "1.0.0"
 
 [deps]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[compat]
+julia = ">= 0.7"
 
 [extras]
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
