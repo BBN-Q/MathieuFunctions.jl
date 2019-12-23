@@ -37,6 +37,12 @@ Mathematica (which, to our knowledge, has the most complete
 implementation of Mathieu functions amongst commonly accessible
 mathematical software packages).
 
+## Installation
+The package can be installed from the Julia registries
+```
+(v1.x) pkg> add MathieuFunctions
+```
+
 ## Mathieu equation characteristic values (eigenvalues)
 
 We follow the notation used in NIST's Digital Library of Mathematical Functions, 
