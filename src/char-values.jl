@@ -23,7 +23,7 @@ function charλ(q::Real, nu_::Real; k::UnitRange=1:1) # reduced = true
     nu0 = nu + maximum(k)
     C = (8.46 + 0.444*nu0)/(1 + 0.085*nu0)
     D =  (0.24 + 0.0214*nu0)/(1 + 0.059*nu0)
-    N = round(Int,ceil((nu0 + 2 + C*abs(q)^D)/2)) # matrix size is 2N+1
+    N = ceil(Int, (nu0 + 2 + C*abs(q)^D)/2) # matrix size is 2N+1
 
     (two, q2, nu2) = float.(promote(2, q, nu))
     d0 = (two .* (-N:N) .- nu2).^2
