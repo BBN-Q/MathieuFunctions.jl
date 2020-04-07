@@ -4,7 +4,8 @@ os:
   - linux
   - osx
 julia:
-  - 1.0
+  - 1.3
+  - 1.4
   - nightly
 
 codecov: true
@@ -12,6 +13,7 @@ coveralls: true
 
 matrix:
   allow_failures:
+    - julia: 1.4
     - julia: nightly
   fast_finish: true
 
