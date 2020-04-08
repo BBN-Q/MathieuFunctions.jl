@@ -125,7 +125,7 @@ MIT (See [TLDR](https://tldrlegal.com/license/mit-license) and ["The MIT License
 
 ## Contributors
 
-Daniel Greenbaum and Marcus P da Silva
+John Lapeyre, Daniel Greenbaum and Marcus P da Silva
 
 ## Acknowledgements
 
