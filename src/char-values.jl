@@ -25,11 +25,11 @@ function charλ(q::Real, nu_::Real; k::UnitRange=1:1) # reduced = true
     D =  (0.24 + 0.0214*nu0)/(1 + 0.059*nu0)
     N = ceil(Int, (nu0 + 2 + C*abs(q)^D)/2) # matrix size is 2N+1
 
-    (two, q2, nu2) = float.(promote(2, q, nu))
+    (two, q2, nu2) = float.(promote(2, q, nu)) # d0 and d1 must be of the same type
     d0 = (two .* (-N:N) .- nu2).^2
-    d1 = q2 .* ones(eltype(q2), 2 * N)
+    d1 = fill(q2, 2 * N)
     A = SymTridiagonal(d0, d1)
-    a = eigvals(A, k)
+    a = eigvals!(A, k)
     return a
 end
 
