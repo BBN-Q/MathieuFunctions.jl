@@ -1,6 +1,6 @@
 # MathieuFunctions.jl
 
-[![Build Status](https://travis-ci.org/BBN-Q/MathieuFunctions.jl.svg?branch=master)](https://travis-ci.org/BBN-Q/MathieuFunctions.jl)
+![Build Status](https://github.com/BBN-Q/MathieuFunctions.jl/workflows/CI/badge.svg)
 <!---
 [![Build status](https://ci.appveyor.com/api/projects/status/35924u90n3qp7isn/branch/master?svg=true)](https://ci.appveyor.com/project/matthewware/mathieufunctions-jl/branch/master)
 --->
