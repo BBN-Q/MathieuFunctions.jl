@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: codecov/codecov-action@v1.1.1
         with:
-          file: ./coverage.xml # optional
+          file: ./lcov.info # optional
           flags: unittests # optional
           name: codecov-umbrella # optional
           fail_ci_if_error: false # optional (default = false)
