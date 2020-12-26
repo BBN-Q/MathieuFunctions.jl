@@ -4,7 +4,7 @@
 <!---
 [![Build status](https://ci.appveyor.com/api/projects/status/35924u90n3qp7isn/branch/master?svg=true)](https://ci.appveyor.com/project/matthewware/mathieufunctions-jl/branch/master)
 --->
-[![Codecov](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/jlapeyre/MathieuFunctions.jl)
+[![codecov](https://codecov.io/gh/BBN-Q/MathieuFunctions.jl/branch/master/graph/badge.svg?token=aZYdfU8ygn)](https://codecov.io/gh/BBN-Q/MathieuFunctions.jl)
 [![Coverage Status](https://coveralls.io/repos/github/BBN-Q/MathieuFunctions.jl/badge.svg?branch=master)](https://coveralls.io/github/BBN-Q/MathieuFunctions.jl?branch=master)
 
 Julia package for Mathieu functions.
