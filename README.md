@@ -11,6 +11,24 @@
 
 Julia package for Mathieu functions.
 
+## Update:
+The updates to the old repository include the addition of the actual Mathieu functions
+themselves, in addition to the calculations for the characteristic values. The code that
+has been added here is also described in my own repository [Mathieu function
+package](https://github.com/mahdi-sasar/Mathieu-Functions). I opted to incorporate my
+code here, given that the package here is already installed in the Julia general
+registry. In this contribution the characteristic values are computed by the original
+code and employs the well-known algorithms featured in Morse & Feshbach's esteemed
+textbook, as well as the [*Digital Library of Mathematical
+Functions*](https://dlmf.nist.gov/28.2). Both sources offer essentially the same thing.
+
+The functions available are `ce(n, q, x)` for the Mathieu even function and `se(n, q, x)`
+for the Mathieu odd function. Here, `n` represents the index of the Mathieu function, and
+`x` is a range (e.g. `x = range(-pi, pi, length=500)`). Plotting can be
+easily done using commands like `plot(x, ce(n, q, x))`, with the Plots package in Julia.
+
+
+
 Mathieu functions are the eigenvalues and eigenfunction of *Mathieu's
 equation* (for more details, see [NIST's Digital Library of
 Mathematical Functions](http://dlmf.nist.gov/28)).
